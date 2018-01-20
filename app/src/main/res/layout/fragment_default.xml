@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="?attr/colorPrimary"
+    android:layout_height="match_parent">
+    
+    <ImageView
+        android:id="@+id/home_logo"
+        android:layout_above="@id/center_anchor"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/logo_with_name"
+        android:layout_width="@dimen/home_logo_size"
+        android:layout_height="@dimen/home_logo_size" />
+    
+    <View
+        android:id="@+id/center_anchor"
+        android:layout_centerInParent="true"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"/>
+
+    <TextView
+        android:id="@+id/countdown_textview"
+        android:gravity="center_horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/center_anchor"
+        android:layout_centerInParent="true"
+        android:fontFamily="@font/roboto_condensed_bold"
+        android:textSize="@dimen/countdown_text_size"
+        android:textAllCaps="false"
+        android:textColor="@color/brightGreen"
+        android:text="##D:##H" />
+
+    <TextView
+        android:gravity="center_horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/countdown_textview"
+        android:layout_centerInParent="true"
+        android:fontFamily="@font/roboto_condensed_bold"
+        android:textAllCaps="false"
+        android:textColor="@color/darkGreen"
+        android:text="TO GO" />
+
+</RelativeLayout>

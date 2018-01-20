@@ -4,26 +4,24 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimary"
-    tools:context="com.fugenapp.HomeActivity">
+    android:background="?attr/colorPrimary"
+    tools:context="com.fugenapp.ui.activities.HomeActivity">
 
-    <ImageView
-        android:id="@+id/home_logo"
-        android:src="@drawable/logo_with_name"
-        android:layout_marginTop="@dimen/home_logo_size"
-        android:layout_centerHorizontal="true"
-        android:layout_width="@dimen/home_logo_size"
-        android:layout_height="@dimen/home_logo_size" />
+    <FrameLayout
+        android:id="@+id/fragment_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
 
     <com.luseen.spacenavigation.SpaceNavigationView
         android:id="@+id/navigation_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:space_background_color="@color/white"
-        app:active_item_color="@color/colorPrimary"
+        app:space_background_color="?attr/navigationBackgroundColor"
+        app:active_item_color="?attr/activeItemColor"
+        app:inactive_item_color="?attr/inactiveItemColor"
         app:centre_button_icon="@drawable/ic_add_black_24dp"
-        app:inactive_centre_button_icon_color="@color/white"
-        app:centre_button_color="@color/colorPrimary"
+        app:inactive_centre_button_icon_color="?attr/centerButtonInactiveIconColor"
+        app:centre_button_color="?attr/centerButtonColor"
         android:layout_alignParentBottom="true"/>
 
 </RelativeLayout>

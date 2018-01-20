@@ -1,9 +1,11 @@
-package com.fugenapp;
+package com.fugenapp.ui.activities;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.Toast;
 
+import com.fugenapp.R;
+import com.fugenapp.ui.fragments.DefaultFragment;
 import com.luseen.spacenavigation.SpaceItem;
 import com.luseen.spacenavigation.SpaceNavigationView;
 import com.luseen.spacenavigation.SpaceOnClickListener;
@@ -29,6 +31,8 @@ public class HomeActivity extends AppCompatActivity implements SpaceOnClickListe
         navigationView.setSpaceOnClickListener(this);
         navigationView.addSpaceItem(new SpaceItem("EVENTS", R.drawable.ic_add_black_24dp));
         navigationView.addSpaceItem(new SpaceItem("PROFILE", R.drawable.ic_add_black_24dp));
+
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new DefaultFragment()).commit();
     }
 
     private void findViews() {

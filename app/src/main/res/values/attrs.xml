@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <attr name="centerButtonColor" format="reference|color"/>
+    <attr name="navigationBackgroundColor" format="reference|color"/>
+    <attr name="centerButtonInactiveIconColor" format="reference|color"/>
+    <attr name="activeItemColor" format="reference|color"/>
+    <attr name="inactiveItemColor" format="reference|color"/>
+</resources>
