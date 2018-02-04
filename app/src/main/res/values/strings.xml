@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">FugenApp</string>
+    <string name="action_bar_text">FUGENIZ 8</string>
+    <string name="search_hint">SEARCH</string>
 </resources>
