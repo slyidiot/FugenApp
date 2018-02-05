@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "1015831092055",
+    "firebase_url": "https://fugen-app.firebaseio.com",
+    "project_id": "fugen-app",
+    "storage_bucket": "fugen-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1015831092055:android:87213f1bc968855c",
+        "android_client_info": {
+          "package_name": "com.fugenapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1015831092055-r0pujuguhomf89k876tj53dcsbjevuqj.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.fugenapp",
+            "certificate_hash": "d2d7aea6f4b500dcac3dfb7e39a5ef0b7595dfc8"
+          }
+        },
+        {
+          "client_id": "1015831092055-k9ehemifsia03tgdtfjppb7s789jhf48.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAvz8wKPoWzjIL4SPnGoqYd-RYUtzCmodU"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1015831092055-k9ehemifsia03tgdtfjppb7s789jhf48.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

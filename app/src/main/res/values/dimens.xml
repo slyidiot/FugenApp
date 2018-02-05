@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="home_logo_size">150dp</dimen>
+    <dimen name="top_padding">30dp</dimen>
+    <dimen name="default_padding">30dp</dimen>
+    <dimen name="min_clickable_size">48dp</dimen>
 
     <!-- Text Sizes -->
-    <dimen name="countdown_text_size">26sp</dimen>
+    <dimen name="action_bar_text_size">18sp</dimen>
+    <dimen name="search_bar_text_size">15sp</dimen>
 </resources>
