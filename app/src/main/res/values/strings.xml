@@ -2,4 +2,7 @@
     <string name="app_name">FugenApp</string>
     <string name="action_bar_text">FUGENIZ 8</string>
     <string name="search_hint">SEARCH</string>
+    <string name="cat_flagship">FLAGSHIP\nEVENTS</string>
+    <string name="cat_eyecatchers">EYE\nCATCHERS</string>
+    <string name="cat_technical">TECHNICAL\nEVENTS</string>
 </resources>

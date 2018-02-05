@@ -4,12 +4,6 @@
         <item name="colorPrimary">@color/white</item>
         <item name="colorPrimaryDark">@color/white</item>
         <item name="colorAccent">@color/brightGreen</item>
-        <!-- Navigation View Colors -->
-        <item name="centerButtonColor">@color/blueGrey</item>
-        <item name="navigationBackgroundColor">@color/white</item>
-        <item name="centerButtonInactiveIconColor">@color/white</item>
-        <item name="activeItemColor">@color/blueGrey</item>
-        <item name="inactiveItemColor">@color/disabledGrey</item>
     </style>
 
 </resources>
