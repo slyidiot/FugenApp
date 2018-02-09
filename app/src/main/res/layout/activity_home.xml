@@ -76,6 +76,7 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/category_tabs"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/search_container"
@@ -84,11 +85,14 @@
         android:orientation="horizontal">
 
         <FrameLayout
+            android:id="@+id/item0"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:onClick="onClick">
 
             <TextView
+                android:id="@+id/flagship_btn"
                 android:layout_width="90dp"
                 android:layout_height="90dp"
                 android:layout_gravity="start"
@@ -98,14 +102,18 @@
                 android:text="@string/cat_flagship"
                 android:textColor="@color/white"
                 android:textSize="@dimen/category_text_size" />
+
         </FrameLayout>
 
         <FrameLayout
+            android:id="@+id/item1"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:onClick="onClick">
 
             <TextView
+                android:id="@+id/eye_catcher_btn"
                 android:layout_width="90dp"
                 android:layout_height="90dp"
                 android:layout_gravity="center"
@@ -118,11 +126,14 @@
         </FrameLayout>
 
         <FrameLayout
+            android:id="@+id/item2"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:onClick="onClick">
 
             <TextView
+                android:id="@+id/technical_btn"
                 android:layout_width="90dp"
                 android:layout_height="90dp"
                 android:layout_gravity="end"
@@ -135,5 +146,14 @@
         </FrameLayout>
 
     </LinearLayout>
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/fragment_pager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/category_tabs"
+        android:layout_marginEnd="@dimen/default_padding"
+        android:layout_marginStart="@dimen/default_padding"
+        android:layout_marginTop="10dp" />
 
 </RelativeLayout>

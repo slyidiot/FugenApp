@@ -5,4 +5,8 @@
     <string name="cat_flagship">FLAGSHIP\nEVENTS</string>
     <string name="cat_eyecatchers">EYE\nCATCHERS</string>
     <string name="cat_technical">TECHNICAL\nEVENTS</string>
+
+    <string name="event_name">Event Name</string>
+    <string name="event_date">15 Feb</string>
+    <string name="event_desc">The quick brown fox jumps over the lazy dog</string>
 </resources>
