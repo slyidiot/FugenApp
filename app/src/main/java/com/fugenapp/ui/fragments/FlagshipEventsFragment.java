@@ -48,7 +48,7 @@ public class FlagshipEventsFragment extends Fragment {
     }
 
     private void displayData() {
-        adapter = new EventRecyclerAdapter(events);
+        adapter = new EventRecyclerAdapter(getActivity(), events);
         recyclerView.setAdapter(adapter);
     }
 

@@ -1,5 +1,6 @@
 package com.fugenapp.adapters;
 
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,14 +10,17 @@ import android.widget.TextView;
 
 import com.fugenapp.R;
 import com.fugenapp.database.model.Event;
+import com.fugenapp.ui.view.EventDetailPopup;
 
 import java.util.ArrayList;
 
 public class EventRecyclerAdapter extends RecyclerView.Adapter<EventRecyclerAdapter.ViewHolder> {
 
     private ArrayList<Event> data;
+    private Context context;
 
-    public EventRecyclerAdapter(ArrayList<Event> data) {
+    public EventRecyclerAdapter(Context context, ArrayList<Event> data) {
+        this.context = context;
         this.data = data;
     }
 
@@ -36,8 +40,12 @@ public class EventRecyclerAdapter extends RecyclerView.Adapter<EventRecyclerAdap
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                /*new BlurPopupWindow.Builder(FugenApp.getAppContext())
-                        .setContentView()*/
+                new EventDetailPopup.Builder(context, event)
+                        .setScaleRatio(0.2f)
+                        .setBlurRadius(5)
+                        .setTintColor(0x30000000)
+                        .build()
+                        .show();
             }
         });
     }
