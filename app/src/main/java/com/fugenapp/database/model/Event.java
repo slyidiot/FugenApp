@@ -9,4 +9,6 @@ public class Event {
     public String desc;
     public String cat;
     public String image;
+    public String contact;
+    public String department;
 }
