@@ -10,7 +10,9 @@ import android.widget.TextView;
 
 import com.fugenapp.R;
 import com.fugenapp.database.model.Event;
+import com.fugenapp.interfaces.OnEventSelectedListener;
 import com.fugenapp.ui.view.EventDetailPopup;
+import com.kyleduo.blurpopupwindow.library.BlurPopupWindow;
 
 import java.util.ArrayList;
 
@@ -34,16 +36,24 @@ public class EventRecyclerAdapter extends RecyclerView.Adapter<EventRecyclerAdap
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         final Event event = data.get(position);
+        final int resID = context.getResources().getIdentifier(event.image, "drawable", context.getPackageName());
         holder.eventName.setText(event.name);
         holder.eventDate.setText(event.date);
         holder.eventDesc.setText(event.desc);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                ((OnEventSelectedListener) context).onEventSelected(resID);
                 new EventDetailPopup.Builder(context, event)
                         .setScaleRatio(0.2f)
-                        .setBlurRadius(5)
+                        .setBlurRadius(0)
                         .setTintColor(0x30000000)
+                        .setOnDismissListener(new BlurPopupWindow.OnDismissListener() {
+                            @Override
+                            public void onDismiss(BlurPopupWindow popupWindow) {
+                                ((OnEventSelectedListener) context).onEventDeselected();
+                            }
+                        })
                         .build()
                         .show();
             }

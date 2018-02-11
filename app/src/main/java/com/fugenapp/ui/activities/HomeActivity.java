@@ -4,18 +4,25 @@ import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.fugenapp.R;
 import com.fugenapp.adapters.EventFragmentsAdapter;
+import com.fugenapp.interfaces.OnEventSelectedListener;
 
-public class HomeActivity extends AppCompatActivity implements View.OnClickListener {
+public class HomeActivity extends AppCompatActivity implements View.OnClickListener, OnEventSelectedListener {
 
     private TextView flagshipBtn;
     private TextView eyeCatcherBtn;
     private TextView technicalBtn;
-
+    private ImageView poster;
     private ViewPager fragmentPager;
+
+    private AlphaAnimation fadeIn;
+    private AlphaAnimation fadeOut;
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
@@ -28,6 +35,46 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_home);
 
         findViews();
+
+        fadeIn = new AlphaAnimation(0, 1);
+        fadeIn.setDuration(100);
+        fadeIn.setFillAfter(true);
+        fadeIn.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+                poster.setVisibility(View.VISIBLE);
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+
+            }
+        });
+        fadeOut = new AlphaAnimation(1, 0);
+        fadeOut.setDuration(100);
+        fadeOut.setFillAfter(true);
+        fadeOut.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                poster.setVisibility(View.INVISIBLE);
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+
+            }
+        });
+
         fragmentPager.setAdapter(new EventFragmentsAdapter(getSupportFragmentManager()));
         fragmentPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
@@ -52,6 +99,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         flagshipBtn = findViewById(R.id.flagship_btn);
         eyeCatcherBtn = findViewById(R.id.eye_catcher_btn);
         technicalBtn = findViewById(R.id.technical_btn);
+        poster = findViewById(R.id.event_poster);
     }
 
     private void refreshCategoryButtons(int position) {
@@ -99,5 +147,18 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                 refreshCategoryButtons(2);
                 break;
         }
+    }
+
+    @Override
+    public void onEventSelected(int resID) {
+        //poster.setImageResource(resID);
+        //poster.setVisibility(View.VISIBLE);
+        //poster.startAnimation(fadeIn);
+    }
+
+    @Override
+    public void onEventDeselected() {
+        //poster.startAnimation(fadeOut);
+        //poster.setVisibility(View.INVISIBLE);
     }
 }

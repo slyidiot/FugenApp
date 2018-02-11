@@ -4,7 +4,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    android:paddingTop="@dimen/top_padding"
     tools:context="com.fugenapp.ui.activities.HomeActivity">
 
     <LinearLayout
@@ -13,6 +12,7 @@
         android:layout_height="50dp"
         android:layout_marginEnd="@dimen/default_padding"
         android:layout_marginStart="@dimen/default_padding"
+        android:layout_marginTop="@dimen/top_padding"
         android:orientation="horizontal">
 
         <TextView
@@ -155,5 +155,12 @@
         android:layout_marginEnd="@dimen/default_padding"
         android:layout_marginStart="@dimen/default_padding"
         android:layout_marginTop="10dp" />
+
+    <ImageView
+        android:id="@+id/event_poster"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:visibility="invisible" />
 
 </RelativeLayout>
