@@ -3,7 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.fugenapp">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-feature android:name="android.hardware.screen.portrait" />
 
     <application
         android:name=".FugenApp"
@@ -14,16 +15,26 @@
         android:supportsRtl="true"
         android:theme="@style/Default"
         tools:replace="android:allowBackup">
-        <activity android:name=".ui.activities.HomeActivity">
+        <activity
+            android:name=".ui.activities.HomeActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
+
+        <activity
+            android:name=".ui.activities.SettingsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activities.AboutActivity"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

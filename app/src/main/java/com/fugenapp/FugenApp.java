@@ -1,7 +1,9 @@
 package com.fugenapp;
 
+import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
+import android.util.TypedValue;
 
 import com.fugenapp.database.FugenAppDatabase;
 
@@ -26,6 +28,14 @@ public class FugenApp extends Application {
 
     public static Context getAppContext() {
         return FugenApp.context;
+    }
+
+    public static int getResIdFromAttribute(final Activity activity, final int attr) {
+        if (attr == 0)
+            return 0;
+        final TypedValue typedvalueattr = new TypedValue();
+        activity.getTheme().resolveAttribute(attr, typedvalueattr, true);
+        return typedvalueattr.resourceId;
     }
 
     @Override

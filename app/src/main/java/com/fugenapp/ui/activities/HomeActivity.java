@@ -7,12 +7,15 @@ import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.graphics.Point;
 import android.graphics.Rect;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.speech.RecognizerIntent;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,8 +24,10 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
+import android.widget.PopupMenu;
 import android.widget.TextView;
 
+import com.fugenapp.FugenApp;
 import com.fugenapp.R;
 import com.fugenapp.adapters.EventFragmentsAdapter;
 import com.fugenapp.interfaces.OnEventSelectedListener;
@@ -35,7 +40,7 @@ import java.util.List;
 
 import me.everything.android.ui.overscroll.OverScrollDecoratorHelper;
 
-public class HomeActivity extends AppCompatActivity implements View.OnClickListener, OnEventSelectedListener, KeyboardSensitiveRelativeLayout.OnKeyboardShowHideListener {
+public class HomeActivity extends AppCompatActivity implements View.OnClickListener, OnEventSelectedListener, KeyboardSensitiveRelativeLayout.OnKeyboardShowHideListener, PopupMenu.OnMenuItemClickListener {
 
     public static final int VOICE_REQUEST_CODE = 2304;
 
@@ -94,7 +99,6 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
             @Override
             public void afterTextChanged(Editable editable) {
-                String newText = editable.toString();
                 searchFragment.filter(editable.toString());
             }
         });
@@ -129,8 +133,6 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             voiceButton.setEnabled(false);
         }
 
-        voiceButton.setOnClickListener(this);
-
         fragmentPager.setAdapter(new EventFragmentsAdapter(getSupportFragmentManager()));
         fragmentPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
@@ -164,52 +166,59 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void refreshCategoryButtons(int position) {
+        int attributeResourceId = FugenApp.getResIdFromAttribute(this, R.attr.defaultCardBG);
+        Drawable defaultBG = getResources().getDrawable(attributeResourceId);
+        attributeResourceId = FugenApp.getResIdFromAttribute(this, R.attr.selectedCardBG);
+        Drawable selectedBG = getResources().getDrawable(attributeResourceId);
+        int defaultTextResID = FugenApp.getResIdFromAttribute(this, R.attr.defaultTextColor);
+        int selectedTextResID = FugenApp.getResIdFromAttribute(this, R.attr.selectedItemTextColor);
+
         switch (position) {
             case 0:
-                flagshipBtn.setBackground(getResources().getDrawable(R.drawable.blue_btn_bg));
-                eyeCatcherBtn.setBackground(getResources().getDrawable(R.drawable.white_btn_bg));
-                technicalBtn.setBackground(getResources().getDrawable(R.drawable.white_btn_bg));
-                funBtn.setBackground(getResources().getDrawable(R.drawable.white_btn_bg));
-                flagshipBtn.setTextColor(getResources().getColor(R.color.white));
-                eyeCatcherBtn.setTextColor(getResources().getColor(R.color.black));
-                technicalBtn.setTextColor(getResources().getColor(R.color.black));
-                funBtn.setTextColor(getResources().getColor(R.color.black));
+                flagshipBtn.setBackground(selectedBG);
+                eyeCatcherBtn.setBackground(defaultBG);
+                technicalBtn.setBackground(defaultBG);
+                funBtn.setBackground(defaultBG);
+                flagshipBtn.setTextColor(getResources().getColor(selectedTextResID));
+                eyeCatcherBtn.setTextColor(getResources().getColor(defaultTextResID));
+                technicalBtn.setTextColor(getResources().getColor(defaultTextResID));
+                funBtn.setTextColor(getResources().getColor(defaultTextResID));
 
                 scrollToView(scrollView, flagshipBtn);
                 break;
             case 1:
-                flagshipBtn.setBackground(getResources().getDrawable(R.drawable.white_btn_bg));
-                eyeCatcherBtn.setBackground(getResources().getDrawable(R.drawable.blue_btn_bg));
-                technicalBtn.setBackground(getResources().getDrawable(R.drawable.white_btn_bg));
-                funBtn.setBackground(getResources().getDrawable(R.drawable.white_btn_bg));
-                flagshipBtn.setTextColor(getResources().getColor(R.color.black));
-                eyeCatcherBtn.setTextColor(getResources().getColor(R.color.white));
-                technicalBtn.setTextColor(getResources().getColor(R.color.black));
-                funBtn.setTextColor(getResources().getColor(R.color.black));
+                flagshipBtn.setBackground(defaultBG);
+                eyeCatcherBtn.setBackground(selectedBG);
+                technicalBtn.setBackground(defaultBG);
+                funBtn.setBackground(defaultBG);
+                flagshipBtn.setTextColor(getResources().getColor(defaultTextResID));
+                eyeCatcherBtn.setTextColor(getResources().getColor(selectedTextResID));
+                technicalBtn.setTextColor(getResources().getColor(defaultTextResID));
+                funBtn.setTextColor(getResources().getColor(defaultTextResID));
 
                 scrollToView(scrollView, eyeCatcherBtn);
                 break;
             case 2:
-                flagshipBtn.setBackground(getResources().getDrawable(R.drawable.white_btn_bg));
-                eyeCatcherBtn.setBackground(getResources().getDrawable(R.drawable.white_btn_bg));
-                technicalBtn.setBackground(getResources().getDrawable(R.drawable.blue_btn_bg));
-                funBtn.setBackground(getResources().getDrawable(R.drawable.white_btn_bg));
-                flagshipBtn.setTextColor(getResources().getColor(R.color.black));
-                eyeCatcherBtn.setTextColor(getResources().getColor(R.color.black));
-                technicalBtn.setTextColor(getResources().getColor(R.color.white));
-                funBtn.setTextColor(getResources().getColor(R.color.black));
+                flagshipBtn.setBackground(defaultBG);
+                eyeCatcherBtn.setBackground(defaultBG);
+                technicalBtn.setBackground(selectedBG);
+                funBtn.setBackground(defaultBG);
+                flagshipBtn.setTextColor(getResources().getColor(defaultTextResID));
+                eyeCatcherBtn.setTextColor(getResources().getColor(defaultTextResID));
+                technicalBtn.setTextColor(getResources().getColor(selectedTextResID));
+                funBtn.setTextColor(getResources().getColor(defaultTextResID));
 
                 scrollToView(scrollView, technicalBtn);
                 break;
             case 3:
-                flagshipBtn.setBackground(getResources().getDrawable(R.drawable.white_btn_bg));
-                eyeCatcherBtn.setBackground(getResources().getDrawable(R.drawable.white_btn_bg));
-                technicalBtn.setBackground(getResources().getDrawable(R.drawable.white_btn_bg));
-                funBtn.setBackground(getResources().getDrawable(R.drawable.blue_btn_bg));
-                flagshipBtn.setTextColor(getResources().getColor(R.color.black));
-                eyeCatcherBtn.setTextColor(getResources().getColor(R.color.black));
-                technicalBtn.setTextColor(getResources().getColor(R.color.black));
-                funBtn.setTextColor(getResources().getColor(R.color.white));
+                flagshipBtn.setBackground(defaultBG);
+                eyeCatcherBtn.setBackground(defaultBG);
+                technicalBtn.setBackground(defaultBG);
+                funBtn.setBackground(selectedBG);
+                flagshipBtn.setTextColor(getResources().getColor(defaultTextResID));
+                eyeCatcherBtn.setTextColor(getResources().getColor(defaultTextResID));
+                technicalBtn.setTextColor(getResources().getColor(defaultTextResID));
+                funBtn.setTextColor(getResources().getColor(selectedTextResID));
 
                 scrollToView(scrollView, funBtn);
                 break;
@@ -277,8 +286,18 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                 intent.putExtra(RecognizerIntent.EXTRA_PROMPT, "Say something...");
                 startActivityForResult(intent, VOICE_REQUEST_CODE);
                 break;
-
+            case R.id.search_icon:
+                searchField.requestFocus();
+                break;
         }
+    }
+
+    public void showPopupMenu(View v) {
+        PopupMenu menu = new PopupMenu(this, v);
+        MenuInflater inflater = menu.getMenuInflater();
+        inflater.inflate(R.menu.main_menu, menu.getMenu());
+        menu.setOnMenuItemClickListener(this);
+        menu.show();
     }
 
     @Override
@@ -324,6 +343,22 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             getSupportFragmentManager().beginTransaction().setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out).remove(searchFragment).commit();
         } else {
             super.onBackPressed();
+        }
+    }
+
+    @Override
+    public boolean onMenuItemClick(MenuItem menuItem) {
+        switch (menuItem.getItemId()) {
+            case R.id.settings:
+                startActivity(new Intent(HomeActivity.this, SettingsActivity.class));
+                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+                return true;
+            case R.id.about:
+                startActivity(new Intent(HomeActivity.this, AboutActivity.class));
+                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+                return true;
+            default:
+                return false;
         }
     }
 }

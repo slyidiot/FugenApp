@@ -49,7 +49,7 @@
                 android:fontFamily="@font/roboto_black"
                 android:gravity="start"
                 android:text="Event Name"
-                android:textColor="@color/black"
+                android:textColor="?attr/defaultTextColor"
                 android:textSize="@dimen/action_bar_text_size" />
 
             <TextView
@@ -59,7 +59,7 @@
                 android:layout_marginTop="10dp"
                 android:fontFamily="@font/roboto"
                 android:text="PG Seminar Hall"
-                android:textColor="@color/grey"
+                android:textColor="?attr/lightTextColor"
                 android:textSize="@dimen/search_bar_text_size" />
 
             <LinearLayout
@@ -75,7 +75,7 @@
                     android:layout_weight="1"
                     android:fontFamily="@font/roboto"
                     android:text="15, 16 Feb"
-                    android:textColor="@color/grey"
+                    android:textColor="?attr/lightTextColor"
                     android:textSize="@dimen/category_text_size" />
 
                 <TextView
@@ -86,7 +86,7 @@
                     android:fontFamily="@font/roboto"
                     android:gravity="right"
                     android:text="09:30am  - 04:00pm"
-                    android:textColor="@color/grey"
+                    android:textColor="?attr/lightTextColor"
                     android:textSize="@dimen/category_text_size" />
 
             </LinearLayout>
@@ -99,7 +99,7 @@
                 android:layout_weight="1"
                 android:fontFamily="@font/roboto"
                 android:text="blahblahblahasfdaffkjdsagdgdghdghdagajdhngadhjfajsgijasdigjasdasdasdasdasdaaa"
-                android:textColor="@color/grey"
+                android:textColor="?attr/lightTextColor"
                 android:textSize="@dimen/category_text_size" />
 
             <TextView
@@ -110,7 +110,7 @@
                 android:autoLink="phone"
                 android:fontFamily="@font/roboto"
                 android:text="Contact:123456789"
-                android:textColor="@color/grey"
+                android:textColor="?attr/lightTextColor"
                 android:textSize="@dimen/category_text_size" />
 
         </LinearLayout>

@@ -4,7 +4,7 @@
     android:id="@+id/main_act_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="?attr/colorPrimary"
     tools:context="com.fugenapp.ui.activities.HomeActivity">
 
     <LinearLayout
@@ -23,17 +23,20 @@
             android:fontFamily="@font/roboto_black"
             android:gravity="center|start"
             android:text="@string/action_bar_text"
-            android:textColor="@color/black"
+            android:textColor="?attr/defaultTextColor"
             android:textSize="@dimen/action_bar_text_size" />
 
         <ImageView
+            android:id="@+id/menu"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
+            android:onClick="showPopupMenu"
             android:paddingBottom="14dp"
             android:paddingEnd="0dp"
             android:paddingStart="20dp"
             android:paddingTop="14dp"
-            android:src="@drawable/ic_more_vert_black_24dp" />
+            android:src="@drawable/ic_more_vert_black_24dp"
+            android:tint="?attr/defaultTextColor" />
 
     </LinearLayout>
 
@@ -44,17 +47,20 @@
         android:layout_below="@id/action_bar"
         android:layout_marginEnd="@dimen/default_padding"
         android:layout_marginStart="@dimen/default_padding"
-        android:background="@color/white"
+        android:background="?attr/colorPrimary"
         android:orientation="horizontal">
 
         <ImageView
+            android:id="@+id/search_icon"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
+            android:onClick="onClick"
             android:paddingBottom="15dp"
             android:paddingEnd="20dp"
             android:paddingStart="0dp"
             android:paddingTop="15dp"
-            android:src="@drawable/ic_search_black_24dp" />
+            android:src="@drawable/ic_search_black_24dp"
+            android:tint="?attr/defaultTextColor" />
 
         <View
             android:layout_width="0dp"
@@ -76,19 +82,21 @@
             android:maxLines="1"
             android:nextFocusDown="@id/search_field"
             android:nextFocusUp="@id/search_field"
-            android:textColor="@color/black"
-            android:textColorHint="@color/black"
+            android:textColor="?attr/defaultTextColor"
+            android:textColorHint="?attr/defaultTextColor"
             android:textSize="@dimen/search_bar_text_size" />
 
         <ImageView
             android:id="@+id/voice_btn"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
+            android:onClick="onClick"
             android:paddingBottom="15dp"
             android:paddingEnd="0dp"
             android:paddingStart="20dp"
             android:paddingTop="15dp"
-            android:src="@drawable/ic_keyboard_voice_black_24dp" />
+            android:src="@drawable/ic_keyboard_voice_black_24dp"
+            android:tint="?attr/defaultTextColor" />
 
     </LinearLayout>
 
@@ -120,11 +128,11 @@
                     android:layout_width="90dp"
                     android:layout_height="90dp"
                     android:layout_gravity="start"
-                    android:background="@drawable/blue_btn_bg"
+                    android:background="?attr/selectedCardBG"
                     android:fontFamily="@font/roboto_black"
                     android:gravity="center"
                     android:text="@string/cat_flagship"
-                    android:textColor="@color/white"
+                    android:textColor="?attr/selectedItemTextColor"
                     android:textSize="@dimen/category_text_size" />
 
             </FrameLayout>
@@ -142,11 +150,11 @@
                     android:layout_width="90dp"
                     android:layout_height="90dp"
                     android:layout_gravity="center"
-                    android:background="@drawable/white_btn_bg"
+                    android:background="?attr/defaultCardBG"
                     android:fontFamily="@font/roboto_black"
                     android:gravity="center"
                     android:text="@string/cat_eyecatchers"
-                    android:textColor="@color/black"
+                    android:textColor="?attr/defaultTextColor"
                     android:textSize="@dimen/category_text_size" />
             </FrameLayout>
 
@@ -163,11 +171,11 @@
                     android:layout_width="90dp"
                     android:layout_height="90dp"
                     android:layout_gravity="end"
-                    android:background="@drawable/white_btn_bg"
+                    android:background="?attr/defaultCardBG"
                     android:fontFamily="@font/roboto_black"
                     android:gravity="center"
                     android:text="@string/cat_technical"
-                    android:textColor="@color/black"
+                    android:textColor="?attr/defaultTextColor"
                     android:textSize="@dimen/category_text_size" />
             </FrameLayout>
 
@@ -184,11 +192,11 @@
                     android:layout_width="90dp"
                     android:layout_height="90dp"
                     android:layout_gravity="end"
-                    android:background="@drawable/white_btn_bg"
+                    android:background="?attr/defaultCardBG"
                     android:fontFamily="@font/roboto_black"
                     android:gravity="center"
                     android:text="@string/cat_fun"
-                    android:textColor="@color/black"
+                    android:textColor="?attr/defaultTextColor"
                     android:textSize="@dimen/category_text_size" />
             </FrameLayout>
 
@@ -215,6 +223,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true" />
+        android:layout_alignParentTop="true"></com.fugenapp.ui.view.LessAnnoyingFrameLayout>
 
 </com.fugenapp.ui.view.KeyboardSensitiveRelativeLayout>

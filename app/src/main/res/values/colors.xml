@@ -6,4 +6,5 @@
     <color name="white">#FFFFFF</color>
     <color name="grey">#b0b0b0</color>
     <color name="disabledGrey">#9E9E9E</color>
+    <color name="heartRed">#c62219</color>
 </resources>
