@@ -20,7 +20,7 @@ import com.fugenapp.database.model.Event;
 
 import java.util.ArrayList;
 
-public class FlagshipEventsFragment extends Fragment {
+public class FunEventsFragment extends Fragment {
 
     private View convertView;
     private RecyclerView recyclerView;
@@ -33,7 +33,7 @@ public class FlagshipEventsFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         convertView = inflater.inflate(R.layout.fragment_events, container, false);
-        new LoadData().execute();
+        new FunEventsFragment.LoadData().execute();
         return convertView;
     }
 
@@ -57,7 +57,7 @@ public class FlagshipEventsFragment extends Fragment {
 
         @Override
         protected Void doInBackground(Void... params) {
-            events = new FugenAppDatabase(getActivity()).getFilteredEvents(FugenApp.FLAGSHIP_EVENTS);
+            events = new FugenAppDatabase(getActivity()).getFilteredEvents(FugenApp.FUN_EVENTS);
             return null;
         }
 

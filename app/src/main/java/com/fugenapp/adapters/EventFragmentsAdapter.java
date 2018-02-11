@@ -6,6 +6,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 
 import com.fugenapp.ui.fragments.EyeCatchersFragment;
 import com.fugenapp.ui.fragments.FlagshipEventsFragment;
+import com.fugenapp.ui.fragments.FunEventsFragment;
 import com.fugenapp.ui.fragments.TechnicalEventsFragment;
 
 public class EventFragmentsAdapter extends FragmentPagerAdapter {
@@ -23,6 +24,8 @@ public class EventFragmentsAdapter extends FragmentPagerAdapter {
                 return new EyeCatchersFragment();
             case 2:
                 return new TechnicalEventsFragment();
+            case 3:
+                return new FunEventsFragment();
             default:
                 return null;
         }
@@ -30,6 +33,6 @@ public class EventFragmentsAdapter extends FragmentPagerAdapter {
 
     @Override
     public int getCount() {
-        return 3;
+        return 4;
     }
 }

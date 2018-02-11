@@ -10,6 +10,8 @@ public class FugenApp extends Application {
     public static final int FLAGSHIP_EVENTS = 1;
     public static final int EYE_CATCHERS = 2;
     public static final int TECHNICAL_EVENTS = 3;
+    public static final int FUN_EVENTS = 4;
+    public static final int SEARCH_FRAG = 5;
 
     private static FugenApp instance;
     private static Context context;

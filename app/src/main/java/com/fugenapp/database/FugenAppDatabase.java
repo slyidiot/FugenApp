@@ -49,6 +49,10 @@ public class FugenAppDatabase extends SQLiteAssetHelper {
                 break;
             case FugenApp.TECHNICAL_EVENTS:
                 category = "technical";
+                break;
+            case FugenApp.FUN_EVENTS:
+                category = "fun";
+                break;
         }
 
         SQLiteDatabase db = getReadableDatabase();

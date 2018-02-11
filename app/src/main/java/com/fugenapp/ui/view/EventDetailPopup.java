@@ -64,7 +64,6 @@ public class EventDetailPopup extends BlurPopupWindow {
         image.setImageResource(resID);
         Bitmap image = BitmapFactory.decodeResource(getResources(), resID);
         Blurry.with(getContext()).radius(5).sampling(5).from(image).into((ImageView) view.findViewById(R.id.event_poster));
-        //((ImageView)findViewById(R.id.event_poster)).setImageBitmap(fastblur(image,0.2f, 10));
         return view;
     }
 

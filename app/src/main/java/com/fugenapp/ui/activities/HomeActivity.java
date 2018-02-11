@@ -1,28 +1,56 @@
 package com.fugenapp.ui.activities;
 
+import android.annotation.SuppressLint;
+import android.content.Context;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
+import android.graphics.Point;
+import android.graphics.Rect;
 import android.os.Bundle;
+import android.speech.RecognizerIntent;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.view.MotionEvent;
 import android.view.View;
-import android.view.animation.AlphaAnimation;
-import android.view.animation.Animation;
+import android.view.ViewGroup;
+import android.view.ViewParent;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.EditText;
+import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.fugenapp.R;
 import com.fugenapp.adapters.EventFragmentsAdapter;
 import com.fugenapp.interfaces.OnEventSelectedListener;
+import com.fugenapp.ui.fragments.SearchFragment;
+import com.fugenapp.ui.view.KeyboardSensitiveRelativeLayout;
+import com.fugenapp.ui.view.LessAnnoyingFrameLayout;
 
-public class HomeActivity extends AppCompatActivity implements View.OnClickListener, OnEventSelectedListener {
+import java.util.ArrayList;
+import java.util.List;
+
+import me.everything.android.ui.overscroll.OverScrollDecoratorHelper;
+
+public class HomeActivity extends AppCompatActivity implements View.OnClickListener, OnEventSelectedListener, KeyboardSensitiveRelativeLayout.OnKeyboardShowHideListener {
+
+    public static final int VOICE_REQUEST_CODE = 2304;
 
     private TextView flagshipBtn;
     private TextView eyeCatcherBtn;
     private TextView technicalBtn;
-    private ImageView poster;
+    private TextView funBtn;
+    private EditText searchField;
     private ViewPager fragmentPager;
+    private HorizontalScrollView scrollView;
+    private View searchFragContainer;
+    private ImageView voiceButton;
+    private LessAnnoyingFrameLayout touchInterceptor;
 
-    private AlphaAnimation fadeIn;
-    private AlphaAnimation fadeOut;
+    private SearchFragment searchFragment;
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
@@ -35,45 +63,73 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_home);
 
         findViews();
+        OverScrollDecoratorHelper.setUpOverScroll(scrollView);
 
-        fadeIn = new AlphaAnimation(0, 1);
-        fadeIn.setDuration(100);
-        fadeIn.setFillAfter(true);
-        fadeIn.setAnimationListener(new Animation.AnimationListener() {
+        searchFragment = new SearchFragment();
+        getSupportFragmentManager().beginTransaction().replace(R.id.search_frag_container, searchFragment).addToBackStack("search").commit();
+        searchField.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
-            public void onAnimationStart(Animation animation) {
-                poster.setVisibility(View.VISIBLE);
-            }
-
-            @Override
-            public void onAnimationEnd(Animation animation) {
-
-            }
-
-            @Override
-            public void onAnimationRepeat(Animation animation) {
-
+            public void onFocusChange(View view, boolean hasFocus) {
+                if (hasFocus) {
+                    searchFragContainer.setVisibility(View.VISIBLE);
+                    getSupportFragmentManager().beginTransaction().replace(R.id.search_frag_container, searchFragment).addToBackStack("search   ").commit();
+                } else {
+                    if (searchField.getText().toString().replaceAll(" ", "").equalsIgnoreCase("")) {
+                        getSupportFragmentManager().beginTransaction().setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out).remove(searchFragment).commit();
+                    }
+                }
             }
         });
-        fadeOut = new AlphaAnimation(1, 0);
-        fadeOut.setDuration(100);
-        fadeOut.setFillAfter(true);
-        fadeOut.setAnimationListener(new Animation.AnimationListener() {
+
+        searchField.addTextChangedListener(new TextWatcher() {
             @Override
-            public void onAnimationStart(Animation animation) {
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
             }
 
             @Override
-            public void onAnimationEnd(Animation animation) {
-                poster.setVisibility(View.INVISIBLE);
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
             }
 
             @Override
-            public void onAnimationRepeat(Animation animation) {
-
+            public void afterTextChanged(Editable editable) {
+                String newText = editable.toString();
+                searchFragment.filter(editable.toString());
             }
         });
+
+        ((KeyboardSensitiveRelativeLayout) findViewById(R.id.main_act_container)).setKeyboardListener(this);
+
+        touchInterceptor.setOnTouchListener(new View.OnTouchListener() {
+            @SuppressLint("ClickableViewAccessibility")
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                    if (searchField.isFocused()) {
+                        Rect outRect = new Rect();
+                        searchField.getGlobalVisibleRect(outRect);
+                        if (!outRect.contains((int) event.getRawX(), (int) event.getRawY())) {
+                            searchField.clearFocus();
+                            InputMethodManager imm = (InputMethodManager) v.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+                            assert imm != null;
+                            imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+                        }
+                    }
+                }
+                return false;
+            }
+        });
+
+        PackageManager pm = getPackageManager();
+        List<ResolveInfo> activities = pm.queryIntentActivities(
+                new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH), 0);
+
+        if (activities.size() == 0) {
+            voiceButton.setEnabled(false);
+        }
+
+        voiceButton.setOnClickListener(this);
 
         fragmentPager.setAdapter(new EventFragmentsAdapter(getSupportFragmentManager()));
         fragmentPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
@@ -99,7 +155,12 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         flagshipBtn = findViewById(R.id.flagship_btn);
         eyeCatcherBtn = findViewById(R.id.eye_catcher_btn);
         technicalBtn = findViewById(R.id.technical_btn);
-        poster = findViewById(R.id.event_poster);
+        funBtn = findViewById(R.id.fun_btn);
+        scrollView = findViewById(R.id.category_tabs);
+        searchField = findViewById(R.id.search_field);
+        searchFragContainer = findViewById(R.id.search_frag_container);
+        touchInterceptor = findViewById(R.id.touchInterceptor);
+        voiceButton = findViewById(R.id.voice_btn);
     }
 
     private void refreshCategoryButtons(int position) {
@@ -108,27 +169,86 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                 flagshipBtn.setBackground(getResources().getDrawable(R.drawable.blue_btn_bg));
                 eyeCatcherBtn.setBackground(getResources().getDrawable(R.drawable.white_btn_bg));
                 technicalBtn.setBackground(getResources().getDrawable(R.drawable.white_btn_bg));
+                funBtn.setBackground(getResources().getDrawable(R.drawable.white_btn_bg));
                 flagshipBtn.setTextColor(getResources().getColor(R.color.white));
                 eyeCatcherBtn.setTextColor(getResources().getColor(R.color.black));
                 technicalBtn.setTextColor(getResources().getColor(R.color.black));
+                funBtn.setTextColor(getResources().getColor(R.color.black));
+
+                scrollToView(scrollView, flagshipBtn);
                 break;
             case 1:
                 flagshipBtn.setBackground(getResources().getDrawable(R.drawable.white_btn_bg));
                 eyeCatcherBtn.setBackground(getResources().getDrawable(R.drawable.blue_btn_bg));
                 technicalBtn.setBackground(getResources().getDrawable(R.drawable.white_btn_bg));
+                funBtn.setBackground(getResources().getDrawable(R.drawable.white_btn_bg));
                 flagshipBtn.setTextColor(getResources().getColor(R.color.black));
                 eyeCatcherBtn.setTextColor(getResources().getColor(R.color.white));
                 technicalBtn.setTextColor(getResources().getColor(R.color.black));
+                funBtn.setTextColor(getResources().getColor(R.color.black));
+
+                scrollToView(scrollView, eyeCatcherBtn);
                 break;
             case 2:
                 flagshipBtn.setBackground(getResources().getDrawable(R.drawable.white_btn_bg));
                 eyeCatcherBtn.setBackground(getResources().getDrawable(R.drawable.white_btn_bg));
                 technicalBtn.setBackground(getResources().getDrawable(R.drawable.blue_btn_bg));
+                funBtn.setBackground(getResources().getDrawable(R.drawable.white_btn_bg));
                 flagshipBtn.setTextColor(getResources().getColor(R.color.black));
                 eyeCatcherBtn.setTextColor(getResources().getColor(R.color.black));
                 technicalBtn.setTextColor(getResources().getColor(R.color.white));
+                funBtn.setTextColor(getResources().getColor(R.color.black));
+
+                scrollToView(scrollView, technicalBtn);
+                break;
+            case 3:
+                flagshipBtn.setBackground(getResources().getDrawable(R.drawable.white_btn_bg));
+                eyeCatcherBtn.setBackground(getResources().getDrawable(R.drawable.white_btn_bg));
+                technicalBtn.setBackground(getResources().getDrawable(R.drawable.white_btn_bg));
+                funBtn.setBackground(getResources().getDrawable(R.drawable.blue_btn_bg));
+                flagshipBtn.setTextColor(getResources().getColor(R.color.black));
+                eyeCatcherBtn.setTextColor(getResources().getColor(R.color.black));
+                technicalBtn.setTextColor(getResources().getColor(R.color.black));
+                funBtn.setTextColor(getResources().getColor(R.color.white));
+
+                scrollToView(scrollView, funBtn);
                 break;
         }
+    }
+
+    /**
+     * Used to scroll to the given view.
+     *
+     * @param scrollViewParent Parent ScrollView
+     * @param view             View to which we need to scroll.
+     */
+    private void scrollToView(final HorizontalScrollView scrollViewParent, final View view) {
+        // Get deepChild Offset
+        Point childOffset = new Point();
+        getDeepChildOffset(scrollViewParent, view.getParent(), view, childOffset);
+        // Scroll to child.
+        scrollViewParent.smoothScrollTo(childOffset.x, 0);
+    }
+
+    /**
+     * Used to get deep child offset.
+     * <p/>
+     * 1. We need to scroll to child in scrollview, but the child may not the direct child to scrollview.
+     * 2. So to get correct child position to scroll, we need to iterate through all of its parent views till the main parent.
+     *
+     * @param mainParent        Main Top parent.
+     * @param parent            Parent.
+     * @param child             Child.
+     * @param accumulatedOffset Accumalated Offset.
+     */
+    private void getDeepChildOffset(final ViewGroup mainParent, final ViewParent parent, final View child, final Point accumulatedOffset) {
+        ViewGroup parentGroup = (ViewGroup) parent;
+        accumulatedOffset.x += child.getLeft();
+        accumulatedOffset.y += child.getTop();
+        if (parentGroup.equals(mainParent)) {
+            return;
+        }
+        getDeepChildOffset(mainParent, parentGroup.getParent(), parentGroup, accumulatedOffset);
     }
 
     @Override
@@ -146,19 +266,64 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                 fragmentPager.setCurrentItem(2, true);
                 refreshCategoryButtons(2);
                 break;
+            case R.id.item3:
+                fragmentPager.setCurrentItem(3, true);
+                refreshCategoryButtons(3);
+                break;
+            case R.id.voice_btn:
+                Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+                intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,
+                        RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
+                intent.putExtra(RecognizerIntent.EXTRA_PROMPT, "Say something...");
+                startActivityForResult(intent, VOICE_REQUEST_CODE);
+                break;
+
         }
     }
 
     @Override
     public void onEventSelected(int resID) {
-        //poster.setImageResource(resID);
-        //poster.setVisibility(View.VISIBLE);
-        //poster.startAnimation(fadeIn);
+        //Event popup shown
     }
 
     @Override
     public void onEventDeselected() {
-        //poster.startAnimation(fadeOut);
-        //poster.setVisibility(View.INVISIBLE);
+        //Event popup not shown
+    }
+
+    @Override
+    public void onKeyboardShowHide(boolean visible) {
+        if (!visible) {
+            searchField.clearFocus();
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == VOICE_REQUEST_CODE && resultCode == RESULT_OK) {
+            ArrayList<String> matches = data.getStringArrayListExtra(
+                    RecognizerIntent.EXTRA_RESULTS);
+            String word = matches.get(0);
+            for (String match : matches) {
+                if (searchFragment.canFilter(match)) {
+                    word = match;
+                    break;
+                }
+            }
+            searchField.setText(word);
+            searchField.requestFocus();
+        }
+        super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (!searchField.getText().toString().equalsIgnoreCase("")) {
+            searchField.setText("");
+            searchField.clearFocus();
+            getSupportFragmentManager().beginTransaction().setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out).remove(searchFragment).commit();
+        } else {
+            super.onBackPressed();
+        }
     }
 }

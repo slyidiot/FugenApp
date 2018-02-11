@@ -12,7 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.fugenapp.FugenApp;
+import com.airbnb.lottie.LottieAnimationView;
 import com.fugenapp.R;
 import com.fugenapp.adapters.EventRecyclerAdapter;
 import com.fugenapp.database.FugenAppDatabase;
@@ -20,20 +20,21 @@ import com.fugenapp.database.model.Event;
 
 import java.util.ArrayList;
 
-public class FlagshipEventsFragment extends Fragment {
+public class SearchFragment extends Fragment {
 
     private View convertView;
     private RecyclerView recyclerView;
+    private LottieAnimationView lottieAnimationView;
 
     private ArrayList<Event> events;
     private EventRecyclerAdapter adapter;
-    private RecyclerView.LayoutManager layoutManager;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        convertView = inflater.inflate(R.layout.fragment_events, container, false);
-        new LoadData().execute();
+        convertView = inflater.inflate(R.layout.fragment_search, container, false);
+
+        new SearchFragment.LoadData().execute();
         return convertView;
     }
 
@@ -42,8 +43,9 @@ public class FlagshipEventsFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         recyclerView = convertView.findViewById(R.id.recycler_view);
+        lottieAnimationView = convertView.findViewById(R.id.anim_view);
         recyclerView.setHasFixedSize(true);
-        layoutManager = new LinearLayoutManager(getActivity());
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(layoutManager);
     }
 
@@ -52,12 +54,41 @@ public class FlagshipEventsFragment extends Fragment {
         recyclerView.setAdapter(adapter);
     }
 
+    public void filter(String name) {
+        ArrayList<Event> filteredEvents = new ArrayList<>();
+        for (Event e : events) {
+            if (e.name.toLowerCase().contains(name.toLowerCase()) || e.cat.toLowerCase().contains(name.toLowerCase()) || e.venue.toLowerCase().contains(name.toLowerCase())) {
+                filteredEvents.add(e);
+            }
+        }
+        if (filteredEvents.isEmpty()) {
+            recyclerView.setVisibility(View.INVISIBLE);
+            lottieAnimationView.setVisibility(View.VISIBLE);
+        } else if (name.equalsIgnoreCase("")) {
+            recyclerView.setVisibility(View.INVISIBLE);
+            lottieAnimationView.setVisibility(View.INVISIBLE);
+        } else {
+            recyclerView.setVisibility(View.VISIBLE);
+            lottieAnimationView.setVisibility(View.INVISIBLE);
+        }
+        adapter.filterList(filteredEvents);
+    }
+
+    public boolean canFilter(String name) {
+        for (Event e : events) {
+            if (e.name.toLowerCase().contains(name.toLowerCase()) || e.cat.toLowerCase().contains(name.toLowerCase()) || e.venue.toLowerCase().contains(name.toLowerCase())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     @SuppressLint("StaticFieldLeak")
     private class LoadData extends AsyncTask<Void, Void, Void> {
 
         @Override
         protected Void doInBackground(Void... params) {
-            events = new FugenAppDatabase(getActivity()).getFilteredEvents(FugenApp.FLAGSHIP_EVENTS);
+            events = new FugenAppDatabase(getActivity()).getAllEvents();
             return null;
         }
 

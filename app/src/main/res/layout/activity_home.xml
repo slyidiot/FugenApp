@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.fugenapp.ui.view.KeyboardSensitiveRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_act_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
@@ -43,6 +44,7 @@
         android:layout_below="@id/action_bar"
         android:layout_marginEnd="@dimen/default_padding"
         android:layout_marginStart="@dimen/default_padding"
+        android:background="@color/white"
         android:orientation="horizontal">
 
         <ImageView
@@ -54,17 +56,32 @@
             android:paddingTop="15dp"
             android:src="@drawable/ic_search_black_24dp" />
 
-        <TextView
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:focusable="true"
+            android:focusableInTouchMode="true" />
+
+        <EditText
+            android:id="@+id/search_field"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:background="@android:color/transparent"
             android:fontFamily="@font/roboto"
             android:gravity="center|start"
-            android:text="@string/search_hint"
+            android:hint="@string/search_hint"
+            android:imeOptions="actionDone"
+            android:inputType="text"
+            android:maxLines="1"
+            android:nextFocusDown="@id/search_field"
+            android:nextFocusUp="@id/search_field"
             android:textColor="@color/black"
+            android:textColorHint="@color/black"
             android:textSize="@dimen/search_bar_text_size" />
 
         <ImageView
+            android:id="@+id/voice_btn"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:paddingBottom="15dp"
@@ -75,92 +92,129 @@
 
     </LinearLayout>
 
-    <LinearLayout
+    <HorizontalScrollView
         android:id="@+id/category_tabs"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/search_container"
         android:layout_marginEnd="20dp"
         android:layout_marginStart="20dp"
-        android:orientation="horizontal">
+        android:fadingEdgeLength="20dp"
+        android:requiresFadingEdge="horizontal"
+        android:scrollbars="none">
 
-        <FrameLayout
-            android:id="@+id/item0"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:onClick="onClick">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/flagship_btn"
-                android:layout_width="90dp"
-                android:layout_height="90dp"
-                android:layout_gravity="start"
-                android:background="@drawable/blue_btn_bg"
-                android:fontFamily="@font/roboto_black"
-                android:gravity="center"
-                android:text="@string/cat_flagship"
-                android:textColor="@color/white"
-                android:textSize="@dimen/category_text_size" />
+            <FrameLayout
+                android:id="@+id/item0"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:onClick="onClick">
 
-        </FrameLayout>
+                <TextView
+                    android:id="@+id/flagship_btn"
+                    android:layout_width="90dp"
+                    android:layout_height="90dp"
+                    android:layout_gravity="start"
+                    android:background="@drawable/blue_btn_bg"
+                    android:fontFamily="@font/roboto_black"
+                    android:gravity="center"
+                    android:text="@string/cat_flagship"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/category_text_size" />
 
-        <FrameLayout
-            android:id="@+id/item1"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:onClick="onClick">
+            </FrameLayout>
 
-            <TextView
-                android:id="@+id/eye_catcher_btn"
-                android:layout_width="90dp"
-                android:layout_height="90dp"
-                android:layout_gravity="center"
-                android:background="@drawable/white_btn_bg"
-                android:fontFamily="@font/roboto_black"
-                android:gravity="center"
-                android:text="@string/cat_eyecatchers"
-                android:textColor="@color/black"
-                android:textSize="@dimen/category_text_size" />
-        </FrameLayout>
+            <FrameLayout
+                android:id="@+id/item1"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginStart="10dp"
+                android:layout_weight="1"
+                android:onClick="onClick">
 
-        <FrameLayout
-            android:id="@+id/item2"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:onClick="onClick">
+                <TextView
+                    android:id="@+id/eye_catcher_btn"
+                    android:layout_width="90dp"
+                    android:layout_height="90dp"
+                    android:layout_gravity="center"
+                    android:background="@drawable/white_btn_bg"
+                    android:fontFamily="@font/roboto_black"
+                    android:gravity="center"
+                    android:text="@string/cat_eyecatchers"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/category_text_size" />
+            </FrameLayout>
 
-            <TextView
-                android:id="@+id/technical_btn"
-                android:layout_width="90dp"
-                android:layout_height="90dp"
-                android:layout_gravity="end"
-                android:background="@drawable/white_btn_bg"
-                android:fontFamily="@font/roboto_black"
-                android:gravity="center"
-                android:text="@string/cat_technical"
-                android:textColor="@color/black"
-                android:textSize="@dimen/category_text_size" />
-        </FrameLayout>
+            <FrameLayout
+                android:id="@+id/item2"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginStart="10dp"
+                android:layout_weight="1"
+                android:onClick="onClick">
 
-    </LinearLayout>
+                <TextView
+                    android:id="@+id/technical_btn"
+                    android:layout_width="90dp"
+                    android:layout_height="90dp"
+                    android:layout_gravity="end"
+                    android:background="@drawable/white_btn_bg"
+                    android:fontFamily="@font/roboto_black"
+                    android:gravity="center"
+                    android:text="@string/cat_technical"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/category_text_size" />
+            </FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/item3"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginStart="10dp"
+                android:layout_weight="1"
+                android:onClick="onClick">
+
+                <TextView
+                    android:id="@+id/fun_btn"
+                    android:layout_width="90dp"
+                    android:layout_height="90dp"
+                    android:layout_gravity="end"
+                    android:background="@drawable/white_btn_bg"
+                    android:fontFamily="@font/roboto_black"
+                    android:gravity="center"
+                    android:text="@string/cat_fun"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/category_text_size" />
+            </FrameLayout>
+
+        </LinearLayout>
+
+    </HorizontalScrollView>
 
     <android.support.v4.view.ViewPager
         android:id="@+id/fragment_pager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/category_tabs"
-        android:layout_marginEnd="@dimen/default_padding"
-        android:layout_marginStart="@dimen/default_padding"
         android:layout_marginTop="10dp" />
 
-    <ImageView
-        android:id="@+id/event_poster"
+    <FrameLayout
+        android:id="@+id/search_frag_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:scaleType="centerCrop"
+        android:layout_below="@id/search_container"
         android:visibility="invisible" />
 
-</RelativeLayout>
+    <com.fugenapp.ui.view.LessAnnoyingFrameLayout
+        android:id="@+id/touchInterceptor"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true" />
+
+</com.fugenapp.ui.view.KeyboardSensitiveRelativeLayout>

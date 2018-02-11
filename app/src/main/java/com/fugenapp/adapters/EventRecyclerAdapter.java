@@ -45,9 +45,7 @@ public class EventRecyclerAdapter extends RecyclerView.Adapter<EventRecyclerAdap
             public void onClick(View view) {
                 ((OnEventSelectedListener) context).onEventSelected(resID);
                 new EventDetailPopup.Builder(context, event)
-                        .setScaleRatio(0.2f)
                         .setBlurRadius(0)
-                        .setTintColor(0x30000000)
                         .setOnDismissListener(new BlurPopupWindow.OnDismissListener() {
                             @Override
                             public void onDismiss(BlurPopupWindow popupWindow) {
@@ -63,6 +61,11 @@ public class EventRecyclerAdapter extends RecyclerView.Adapter<EventRecyclerAdap
     @Override
     public int getItemCount() {
         return data.size();
+    }
+
+    public void filterList(ArrayList<Event> newData) {
+        this.data = newData;
+        notifyDataSetChanged();
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
