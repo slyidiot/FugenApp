@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?attr/colorPrimary"
+    android:orientation="vertical"
+    tools:context="com.fugenapp.ui.activities.AboutActivity">
+
+    <LinearLayout
+        android:id="@+id/action_bar"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginEnd="@dimen/default_padding"
+        android:layout_marginStart="@dimen/default_padding"
+        android:layout_marginTop="@dimen/top_padding"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:fontFamily="@font/roboto_black"
+            android:gravity="center|start"
+            android:text="@string/about_caps"
+            android:textColor="?attr/defaultTextColor"
+            android:textSize="@dimen/action_bar_text_size" />
+
+        <ImageView
+            android:id="@+id/back"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:onClick="goBack"
+            android:paddingBottom="14dp"
+            android:paddingEnd="0dp"
+            android:paddingStart="20dp"
+            android:paddingTop="14dp"
+            android:src="@drawable/ic_arrow_back_black_24dp"
+            android:tint="?attr/defaultTextColor" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/sng"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/action_bar"
+        android:layout_marginEnd="@dimen/default_padding"
+        android:layout_marginStart="@dimen/default_padding"
+        android:layout_marginTop="@dimen/top_padding"
+        android:fontFamily="@font/roboto_black"
+        android:gravity="center|start"
+        android:text="@string/sng"
+        android:textColor="?attr/defaultTextColor"
+        android:textSize="@dimen/search_bar_text_size" />
+
+    <TextView
+        android:id="@+id/sng_desc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/sng"
+        android:layout_marginEnd="@dimen/default_padding"
+        android:layout_marginStart="@dimen/default_padding"
+        android:fontFamily="@font/roboto"
+        android:text="@string/about_sngce"
+        android:textColor="?attr/defaultTextColor" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/sng_desc"
+        android:layout_marginBottom="5dp"
+        android:layout_marginEnd="@dimen/default_padding"
+        android:layout_marginStart="@dimen/default_padding"
+        android:layout_marginTop="@dimen/default_padding"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto"
+            android:gravity="center|start"
+            android:text="@string/share_quote"
+            android:textColor="?attr/defaultTextColor"
+            android:textSize="@dimen/action_bar_text_size" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:autoLink="web"
+            android:gravity="center|start"
+            android:text="@string/github_link"
+            android:textColor="?attr/defaultTextColor" />
+
+    </LinearLayout>
+
+    <include
+        android:id="@+id/about_footer"
+        layout="@layout/footer"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="10dp" />
+
+</RelativeLayout>

@@ -4,5 +4,7 @@
     <color name="brightGreen">#46c411</color>
     <color name="darkGreen">#227d04</color>
     <color name="white">#FFFFFF</color>
+    <color name="grey">#b0b0b0</color>
     <color name="disabledGrey">#9E9E9E</color>
+    <color name="heartRed">#c62219</color>
 </resources>

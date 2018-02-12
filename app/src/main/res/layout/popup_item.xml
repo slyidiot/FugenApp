@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/event_poster"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop" />
+
+    <RelativeLayout
+        android:id="@+id/popup_container"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:clickable="true"
+        android:focusable="true">
+
+        <com.makeramen.roundedimageview.RoundedImageView
+            android:id="@+id/popup_event_image"
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="40dp"
+            android:scaleType="centerCrop"
+            app:riv_corner_radius_top_left="7dp"
+            app:riv_corner_radius_top_right="7dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/popup_event_image"
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="25dp"
+            android:background="@drawable/rounded_rect_bg"
+            android:gravity="top"
+            android:minHeight="250dp"
+            android:orientation="vertical"
+            android:padding="20dp">
+
+            <TextView
+                android:id="@+id/popup_event_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto_black"
+                android:gravity="start"
+                android:text="Event Name"
+                android:textColor="?attr/defaultTextColor"
+                android:textSize="@dimen/action_bar_text_size" />
+
+            <TextView
+                android:id="@+id/popup_event_venue"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/roboto"
+                android:text="PG Seminar Hall"
+                android:textColor="?attr/lightTextColor"
+                android:textSize="@dimen/search_bar_text_size" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/popup_event_date"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/roboto"
+                    android:text="15, 16 Feb"
+                    android:textColor="?attr/lightTextColor"
+                    android:textSize="@dimen/category_text_size" />
+
+                <TextView
+                    android:id="@+id/popup_event_time"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/roboto"
+                    android:gravity="right"
+                    android:text="09:30am  - 04:00pm"
+                    android:textColor="?attr/lightTextColor"
+                    android:textSize="@dimen/category_text_size" />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/popup_event_desc"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginTop="10dp"
+                android:layout_weight="1"
+                android:fontFamily="@font/roboto"
+                android:text="blahblahblahasfdaffkjdsagdgdghdghdagajdhngadhjfajsgijasdigjasdasdasdasdasdaaa"
+                android:textColor="?attr/lightTextColor"
+                android:textSize="@dimen/category_text_size" />
+
+            <TextView
+                android:id="@+id/popup_event_contact"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:autoLink="phone"
+                android:fontFamily="@font/roboto"
+                android:text="Contact:123456789"
+                android:textColor="?attr/lightTextColor"
+                android:textSize="@dimen/category_text_size" />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</RelativeLayout>
