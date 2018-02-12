@@ -13,10 +13,14 @@
     <string name="about">About</string>
     <string name="settings_caps">SETTINGS</string>
     <string name="about_caps">ABOUT</string>
-    <string name="share_quote">Knowledge is best when shared</string>
+    <string name="share_quote">Get the source code!</string>
     <string name="github_link">https://github.com/slyidiot/FugenApp</string>
     <string name="made_with">Made With</string>
     <string name="by_3rd_year_cse">By 3rd Year CSE</string>
     <string name="about_sngce">Sree Narayana Gurukulam College of Engineering is a new age, multi-disciplinary institute offering a portfolio of courses in Engineering, Computer Applications and Management streams. Ensuring the right blend of academic rigor and business focus of the industry, the institution has transformed into a trend setter in professional education since 2002. SNGCE prides itself on creating a congenial academic environment, conducive to learning on the strength of most modern infrastructural facilities provided by the management and a highly motivated and competent team of faculty constantly endeavouring to mould world-class professionals of the future</string>
     <string name="sng">SNGCE</string>
+    <string name="innovations_redefined">INNOVATIONS REDEFINED</string>
+    <string name="trailer">WATCH TRAILER</string>
+    <string name="browse_events">BROWSE EVENTS</string>
+    <string name="youtube_video_id">L27srt1r16A</string>
 </resources>

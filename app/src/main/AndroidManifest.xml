@@ -4,6 +4,7 @@
     package="com.fugenapp">
 
     <uses-permission android:name="android.permission.INTERNET" />
+
     <uses-feature android:name="android.hardware.screen.portrait" />
 
     <application
@@ -11,19 +12,12 @@
         android:allowBackup="true"
         android:icon="@drawable/logo_with_name"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Default"
         tools:replace="android:allowBackup">
         <activity
             android:name=".ui.activities.HomeActivity"
-            android:screenOrientation="portrait">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            android:screenOrientation="portrait" />
 
         <meta-data
             android:name="preloaded_fonts"
@@ -35,6 +29,13 @@
         <activity
             android:name=".ui.activities.AboutActivity"
             android:screenOrientation="portrait" />
+        <activity android:name=".ui.activities.MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>
