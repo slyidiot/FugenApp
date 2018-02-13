@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.fugenapp.ui.view.KeyboardSensitiveRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_act_container"
     android:layout_width="match_parent"
@@ -12,11 +13,18 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginEnd="@dimen/default_padding"
-        android:layout_marginStart="@dimen/default_padding"
+        android:layout_marginStart="@dimen/top_padding"
         android:layout_marginTop="@dimen/top_padding"
         android:orientation="horizontal">
 
-        <TextView
+        <com.airbnb.lottie.LottieAnimationView
+            android:layout_width="150dp"
+            android:layout_height="50dp"
+            app:lottie_autoPlay="true"
+            app:lottie_fileName="animations/hashtag.json"
+            app:lottie_loop="true" />
+
+        <!--<TextView
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -24,7 +32,12 @@
             android:gravity="center|start"
             android:text="@string/action_bar_text"
             android:textColor="?attr/defaultTextColor"
-            android:textSize="@dimen/action_bar_text_size" />
+            android:textSize="@dimen/action_bar_text_size" />-->
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
 
         <ImageView
             android:id="@+id/menu"

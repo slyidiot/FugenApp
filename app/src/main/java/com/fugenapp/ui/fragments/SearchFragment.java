@@ -69,6 +69,7 @@ public class SearchFragment extends Fragment {
             lottieAnimationView.setVisibility(View.INVISIBLE);
         } else {
             recyclerView.setVisibility(View.VISIBLE);
+            recyclerView.setAdapter(adapter);
             lottieAnimationView.setVisibility(View.INVISIBLE);
         }
         adapter.filterList(filteredEvents);

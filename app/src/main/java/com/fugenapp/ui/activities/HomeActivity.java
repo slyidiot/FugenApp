@@ -331,6 +331,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             }
             searchField.setText(word);
             searchField.requestFocus();
+            searchFragment.filter(word);
         }
         super.onActivityResult(requestCode, resultCode, data);
     }
@@ -349,10 +350,6 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public boolean onMenuItemClick(MenuItem menuItem) {
         switch (menuItem.getItemId()) {
-            case R.id.settings:
-                startActivity(new Intent(HomeActivity.this, SettingsActivity.class));
-                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
-                return true;
             case R.id.about:
                 startActivity(new Intent(HomeActivity.this, AboutActivity.class));
                 overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
